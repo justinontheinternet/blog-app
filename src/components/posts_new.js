@@ -14,7 +14,7 @@ class PostsNew extends Component {
         // blog post has been created, navigate user to the index
         // Navigate by calling this.context.router.push with the new path
         this.context.router.push('/');
-      })
+      });
   }
 
   render() {
