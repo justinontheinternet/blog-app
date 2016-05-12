@@ -12,6 +12,9 @@ class PostsNew extends Component {
         <div className="form-group">
           <label>Title</label>
           <input type="text" className="form-control" {...title} />
+          <div className="text-help">
+            {title.touched ? title.error : ''}
+          </div>
         </div>
 
         <div className="form-group">
@@ -30,10 +33,20 @@ class PostsNew extends Component {
   }
 }
 
+function validate(values) {
+  const errors = {};
+
+  if (!values.title) {
+    errors.title = 'Enter a title';
+  }
+
+  return errors;
+}
+
 // reduxForm is very similar to connect, but has one more argument: the object
 // second is mapStateToProps, third is mapDispathToProps
-
 export default reduxForm({
   form: 'PostsNew',
-  fields: ['title', 'categories', 'content']
+  fields: ['title', 'categories', 'content'],
+  validate
 }, null, { createPost })(PostsNew);
