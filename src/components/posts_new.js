@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
+import { createPost } from '../actions/index';
 
 class PostsNew extends Component {
   render() {
     const { fields: { title, categories, content }, handleSubmit } = this.props;
 
     return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(this.props.createPost)}>
         <h3>Create a New Post</h3>
         <div className="form-group">
           <label>Title</label>
@@ -29,7 +30,10 @@ class PostsNew extends Component {
   }
 }
 
+// reduxForm is very similar to connect, but has one more argument: the object
+// second is mapStateToProps, third is mapDispathToProps
+
 export default reduxForm({
   form: 'PostsNew',
   fields: ['title', 'categories', 'content']
-})(PostsNew);
+}, null, { createPost })(PostsNew);
